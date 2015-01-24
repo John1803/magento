@@ -1,0 +1,5 @@
+<layuot version="0.0.1">
+    <default>
+        <block type="page/html" name="root" output="toHtml" template="olelookoie/helloworld/simple_page.phtml" />
+    </default>
+</layuot>
