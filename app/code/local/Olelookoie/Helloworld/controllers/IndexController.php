@@ -4,7 +4,8 @@ class Olelookoie_Helloworld_IndexController extends Mage_Core_Controller_Front_A
 {
     public function indexAction()
     {
-        echo 'Hello Index!';
+        $this->loadLayout();
+        $this->renderLayout();
     }
 
     public function goodbyeAction()
