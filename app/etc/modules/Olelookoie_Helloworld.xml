@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Olelookoie_Helloworld>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Olelookoie_Helloworld>
+    </modules>
+</config>

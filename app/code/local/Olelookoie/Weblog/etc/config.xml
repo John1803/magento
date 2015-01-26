@@ -1,0 +1,26 @@
+<config>
+    <modules>
+        <Olelookoie_Weblog>
+            <version>0.0.1</version>
+        </Olelookoie_Weblog>
+    </modules>
+    <frontend>
+        <routers>
+            <weblog>
+                <use>standard</use>
+                <args>
+                    <module>Olelookoie_Weblog</module>
+                    <frontName>weblog</frontName>
+                </args>
+            </weblog>
+        </routers>
+    </frontend>
+    <global>
+        <models>
+            <weblog>
+                <class>Olelookoie_Weblog_Model</class>
+                <resourceModel>weblog_resource</resourceModel>
+            </weblog>
+        </models>
+    </global>
+</config>

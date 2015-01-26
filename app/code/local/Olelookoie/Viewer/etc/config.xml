@@ -1,0 +1,20 @@
+<config>
+    <modules>
+        <Olelookoie_Viewer>
+            <version>0.1.0</version>
+        </Olelookoie_Viewer>
+    </modules>
+    <global>
+        <events>
+            <controller_front_init_routers>
+                <observers>
+                    <Olelookoie_viewer_model_observer>
+                        <type>singleton</type>
+                        <class>Olelookoie_Viewer_Model_Observer</class>
+                        <method>checkForConfigRequest</method>
+                    </Olelookoie_viewer_model_observer>
+                </observers>
+            </controller_front_init_routers>
+        </events>
+    </global>
+</config>
