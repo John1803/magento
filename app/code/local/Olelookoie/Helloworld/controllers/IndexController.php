@@ -1,11 +1,10 @@
 <?php
 
-class Olelookoie_Helloworld_IndexController extends Mage_Core_Controller_Front_Action
+class Olelookoie_Collection_IndexController extends Mage_Core_Controller_Front_Action
 {
     public function indexAction()
     {
-        $this->loadLayout();
-        $this->renderLayout();
+        echo 'SetUp';
     }
 
     public function goodbyeAction()

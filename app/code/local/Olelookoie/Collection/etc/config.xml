@@ -1,0 +1,18 @@
+<config>
+    <modules>
+        <Olelookoie_Collection>
+            <version>0.0.1</version>
+        </Olelookoie_Collection>
+    </modules>
+    <frontend>
+        <routers>
+            <collect>
+                <use>standard</use>
+                <args>
+                    <module>Olelookoie_Collection</module>
+                    <frontName>collect</frontName>
+                </args>
+            </collect>
+        </routers>
+    </frontend>
+</config>

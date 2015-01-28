@@ -4,12 +4,7 @@ class Olelookoie_Weblog_IndexController extends Mage_Core_Controller_Front_Actio
 {
     public function testModelAction()
     {
-        $params = $this->getRequest()->getParams();
-        $blogPost = Mage::getModel('weblog/blogpost');
-        echo("Loading the blogpost with an ID of ".$params['id']);
-        $blogPost->load($params['id']);
-        $data = $blogPost->getData();
-        var_dump($data);
+        echo 'SetUp';
     }
 
     public function createNewPostAction()
