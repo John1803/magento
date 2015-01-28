@@ -136,3 +136,4 @@ app/design/frontend/base/default/template/*
 !app/design/frontend/base/default/layout/local.xml
 !app/design/frontend/base/default/layout/olelukoie_news.xml
 !app/design/frontend/base/default/template/olelookoie/
+!app/design/frontend/base/default/template/olelukoie/news/
