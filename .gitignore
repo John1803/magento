@@ -122,6 +122,11 @@ skin/frontend/enterprise
 skin/install/
 var/
 
+app/code/*
+!app/code/community/
+app/code/community/*
+!app/code/community/Olelukoie/
+
 app/design/*
 !app/design/frontend/
 app/design/frontend/*

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<layout version="0.0.1">
+    <default>
+        <reference name="footer_links">
+            <action method="addLink" translate="label_title" module="olelukoie_news" ifconfig="news/view/enabled">
+                <label>News</label>
+                <url>news</url>
+                <title>News</title>
+                <prepare>true</prepare>
+            </action>
+        </reference>
+    </default>
+
+    <olelukoie_news_index_index translate="label">
+        <label>News Page</label>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/2columns-right.phtml</template>
+            </action>
+            <action method="setHeaderTitle" translate="title" module="olelukoie_news">
+                <title>Site News</title>
+            </action>
+        </reference>
+        <refence name="content">
+            <block type="olelukoie_news/list" name="news.list" template="olelukoie/news/list.phtml">
+                <block type="page/html_pager" name="news.list.pager" as="news_list_pager" />
+            </block>
+        </refence>
+    </olelukoie_news_index_index>
+
+    <olelukoie_news_index_view translate="label">
+        <label>News Item Page</label>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/2colums-right.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="olelukoie_news/news" name="news.item" template="olelukoie/news/item.phtml" />
+        </reference>
+    </olelukoie_news_index_view>
+</layout>
