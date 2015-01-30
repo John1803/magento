@@ -54,7 +54,7 @@ class Olelukoie_News_Helper_Image extends Mage_Core_Helper_Abstract
         'minheight' => self::MIN_HEIGHT,
         'maxheight' => self::MAX_HEIGHT,
         'minwidth' => self::MIN_WIDTH,
-        'maxwidth' => self::MAX_WIDTH,
+        'maxwidth' => self::MAX_WIDTH
     ];
 
 }
