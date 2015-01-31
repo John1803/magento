@@ -6,13 +6,13 @@
     </modules>
     <frontend>
         <routers>
-            <weblog>
+            <weblog_weblog>
                 <use>standard</use>
                 <args>
                     <module>Olelookoie_Weblog</module>
                     <frontName>weblog</frontName>
                 </args>
-            </weblog>
+            </weblog_weblog>
         </routers>
     </frontend>
     <global>

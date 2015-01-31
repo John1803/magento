@@ -24,12 +24,13 @@ class Olelukoie_News_IndexController extends Mage_Core_Controller_Front_Action
 
         if ($listBlock) {
             $currentPage = abs(intval($this->getRequest()->getParam('p')));
+            if ($currentPage < 1) {
+                $currentPage = 1;
+            }
+            $listBlock->setCurrentPage($currentPage);
         }
 
-        if ($currentPage < 1) {
-            $currentPage = 1;
-        }
-        $listBlock->setCurrentPage($currentPage);
+        $this->renderLayout();
     }
 
     public function viewAction()
@@ -52,7 +53,7 @@ class Olelukoie_News_IndexController extends Mage_Core_Controller_Front_Action
 
         Mage::register('news_item', $model);
 
-        Mage::dispatchEvent('before_news_item_display', array('news_item' => $model));
+        Mage::dispatchEvent('before_news_item_display', ['news_item' => $model]);
 
         $this->loadLayout();
         $itemBlock = $this->getLayout()->getBlock('news.list');
@@ -67,4 +68,10 @@ class Olelukoie_News_IndexController extends Mage_Core_Controller_Front_Action
         }
         $this->renderLayout();
     }
+
+    public function testModelAction()
+    {
+        echo 'setUp';
+    }
+
 }
