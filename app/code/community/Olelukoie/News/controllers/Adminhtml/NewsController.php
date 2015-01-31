@@ -99,4 +99,56 @@ class Olelukoie_News_Adminhtml_NewsController extends Mage_Adminhtml_Controller_
         $this->renderLayout();
     }
 
+    // Save action
+    public function saveAction()
+    {
+        $redirectPath = '*/*';
+        $redirectParams = [];
+
+        // check if data sent
+        $data = $this->getRequest()->getPost();
+        if ($data) {
+            $data = $this->_filterPostData($data);
+
+            //init model and set data
+            /** @var Olelukoie_News_Model_News $model */
+            $model = Mage::getModel('olelukoie_news/news');
+
+            //if news item exists? try to load it
+            $newsId = $this->getRequest()->getParams('id');
+            if ($newsId) {
+                $model->load($newsId);
+            }
+
+            //save image data and remove from data array
+            if (isset($data['image'])) {
+                $imageData = $data['image'];
+                unset($data['image']);
+            } else {
+                $imageData = [];
+            }
+
+            $model->addData($data);
+
+            try {
+                $hasError = false;
+                /** @var Olelukoie_News_Helper_Image $imageHelper */
+                $imageHelper = Mage::helper('olelukoie_news/image');
+
+                //remove image
+                if (isset($imageData['delete']) && $model->getImage()) {
+                    $imageHelper->removeImage($model->getImage());
+                    $model->setImage(null);
+                }
+
+                //upload new image
+                $imageFile = $imageHelper->uploadImage('image');
+                if ($imageFile) {
+                    if ($model->getImage()) {
+                        $imageHelper->removeImage($model->getImage());
+                    }
+                }
+            }
+        }
+    }
 }
