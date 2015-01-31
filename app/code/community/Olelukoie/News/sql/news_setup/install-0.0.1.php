@@ -1,13 +1,10 @@
 <?php
 
-/**
- * @var Mage_Core_Model_Resource_Setup $installer
- */
 
 $installer = $this;
-
+$installer->startSetup();
 $table = $installer->getConnection()
-    ->newTable($installer->getTable('olelukoie_new/news'))
+    ->newTable($installer->getTable('olelukoie_news/news'))
     ->addColumn('id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
         'unsigned' => true,
         'identity' =>true,
@@ -48,3 +45,5 @@ $table = $installer->getConnection()
     ->setComment('News item');
 
 $installer->getConnection()->createTable($table);
+
+$installer->endSetup();
