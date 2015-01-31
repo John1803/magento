@@ -84,4 +84,33 @@
             </layout>
         </routers>
     </frontend>
+    <Admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Olelukoie_News before="Mage_adminhtml">Olelukoie_News_adminhtml</Olelukoie_News>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </Admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <olelukoie_news>
+                    <file>olelukoie_news.xml</file>
+                </olelukoie_news>
+            </updates>
+        </layout>
+    </adminhtml>
+    <default>
+        <news>
+            <view>
+                <enabled>1</enabled>
+                <items_per_page>20</items_per_page>
+                <days_difference>3</days_difference>
+            </view>
+        </news>
+    </default>
 </config>
