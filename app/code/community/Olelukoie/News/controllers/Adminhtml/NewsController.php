@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class Olelukoie_News_Adminhtml_NewsController
+ *
+ * @method Olelukoie_News_Helper_Image flushImagesCache()
+ */
 class Olelukoie_News_Adminhtml_NewsController extends Mage_Adminhtml_Controller_Action
 {
     /**
@@ -147,8 +152,128 @@ class Olelukoie_News_Adminhtml_NewsController extends Mage_Adminhtml_Controller_
                     if ($model->getImage()) {
                         $imageHelper->removeImage($model->getImage());
                     }
+                    $model->setImage();
                 }
+                //save the data
+                $model->save();
+
+                //display success message
+                $this->_getSession()->addSuccess(
+                    Mage::helper('olelukoie_news')->__('The news item has been saved')
+                );
+
+                //check if 'Save and Continue'
+                if ($this->getRequest()->getParam('back')) {
+                    $redirectPath = '*/*/edit';
+                    $redirectParams = ['id' => $model->getID()];
+                }
+            } catch (Mage_Core_Exception $e) {
+                $hasError = true;
+                $this->_getSession()->addError($e->getMessages());
+            } catch (Exception $e) {
+                $hasError = true;
+                $this->_getSession()->addException($e, Mage::helper('olelukoie_news')->__('An error occurred while saving the news item.'));
+            }
+
+            if ($hasError) {
+                $this->_getSession()->setFormData();
+                $redirectPath = '*/*/edit';
+                $redirectParams = ['id' => $this->getRequest()->getParam('id')];
             }
         }
+        $this->_redirect($redirectPath, $redirectParams);
     }
+
+    /**
+     * Delete action
+     */
+
+    public function deleteAction()
+    {
+        //check if we know what should be deleted
+        $itemId = $this->getRequest()->getParam('id');
+        if ($itemId) {
+            try {
+                // init model and delete
+                /** @var Olelukoie_News_Model_News $model */
+                $model = Mage::getModel('olelukoie_news/news');
+                $model->load($itemId);
+                if (!$model->getId()) {
+                    Mage::throwException(Mage::helper('olelukoie_news')->__('Unable to find a news item.'));
+                }
+                $model->delete();
+
+                // display success message
+                $this->_getSession()->addSuccess(
+                    Mage::helper('olelukoie_news')->__('The news item has been deleted.')
+                );
+            } catch (Mage_Core_Exception $e) {
+                $this->_getSession()->addError($e->getMessage());
+            } catch (Exception $e) {
+                $this->_getSession()->addException($e,
+                    Mage::helper('olelukoie_news')->__('An error occurred while deleting the news item.')
+                );
+            }
+        }
+        // go to grid
+        $this->_redirect('*/*/');
+    }
+
+    /**
+     * Check the permission to run it
+     *
+     * @return boolean
+     */
+    protected function _isAllowed()
+    {
+        switch ($this->getRequest()->getActionName()) {
+            case 'new':
+            case 'save':
+                return Mage::getSingleton('Admin/session')->isAllowed('news/manage/save');
+                break;
+            case 'delete':
+                return Mage::getSingleton('Admin/session')->isAllowed('news/manage/delete');
+                break;
+            default:
+                return Mage::getSingleton('Admin/session')->isAllowed('news/manage');
+                break;
+        }
+    }
+
+    /**
+     * Filtering posted data. Converting localized data if needed
+     *
+     * @param array
+     * @return array
+     */
+    protected function _filterPostData($data)
+    {
+        $data = $this->_filterDates($data, array('time_published'));
+        return $data;
+    }
+
+    /**
+     * Grid ajax action
+     */
+    public function gridAction()
+    {
+        $this->loadLayout();
+        $this->renderLayout();
+    }
+
+    /**
+     * Flush News Posts Images Cache action
+     *
+     */
+    public function flushAction()
+    {
+        if (Mage::helper('olelukoie_news/image')->flushImagesCache()) {
+            $this->_getSession()->addSuccess('Cache successfully flushed');
+        } else {
+            $this->_getSession()->addError('There was error during flushing cache');
+        }
+        $this->_forward('index');
+    }
+
+
 }
