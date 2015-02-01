@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <news translate="title" module="olelukoie_news">
+            <title>News</title>
+            <sort_order>65</sort_order>
+            <children>
+                <manage translate="title" module="olelukoie_news">
+                    <title>Manage News</title>
+                    <action>adminhtml</action>
+                    <sort_order>50</sort_order>
+                </manage>
+            </children>
+        </news>
+    </menu>
+
+    <acl>
+        <resources>
+            <Admin>
+                <children>
+                    <news translate="title" module="olelukoie_news">
+                        <title>News</title>
+                        <sort_order>65</sort_order>
+                        <children>
+                            <manage translate="title">
+                                <title>Manage News</title>
+                                <sort_order>0</sort_order>
+                                <children>
+                                    <save translate="title">
+                                        <title>Save News</title>
+                                        <sort_order>0</sort_order>
+                                    </save>
+                                    <delete translate="title">
+                                        <title>Delete News</title>
+                                        <sort_order>10</sort_order>
+                                    </delete>
+                                </children>
+                            </manage>
+                        </children>
+                    </news>
+                    <system>
+                        <childre>
+                            <config>
+                                <children>
+                                    <news translate="title" module="olelukoie_news">
+                                        <title>News Manager</title>
+                                    </news>
+                                </children>
+                            </config>
+                        </childre>
+                    </system>
+                </children>
+            </Admin>
+        </resources>
+    </acl>
+</config>
